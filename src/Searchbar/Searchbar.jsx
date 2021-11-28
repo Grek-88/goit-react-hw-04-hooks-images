@@ -1,14 +1,21 @@
+import React, { useState } from "react";
 import s from "../Searchbar/Searchbar.module.css";
 
 export default function Searchbar(props) {
+  const [query, setQuery] = useState('');
+
   function inputQuery(ev) {
     ev.preventDefault();
-    if (ev.target[1].value.trim() === "") {
+    if (query === "") {
       alert("Для поиска необходимо ввести слово");
       return;
     }
-    props.onSubmit(ev.target[1].value.toLowerCase());
-    ev.target[1].value = "";
+    props.onSubmit(query);
+    setQuery("");
+  }
+
+  function handelChange (ev){
+    setQuery(ev.target.value.toLowerCase().trim());
   }
 
   return (
@@ -19,6 +26,7 @@ export default function Searchbar(props) {
         </button>
 
         <input
+          onChange={handelChange}
           className={s.SearchFormInput}
           type="text"
           autoComplete="off"

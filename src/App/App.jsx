@@ -45,8 +45,6 @@ export default function App() {
         );
       })
       .then((imgDataFetch) => {
-        console.log(imgDataFetch);
-        console.log(page);
         setPage(page + 1);
         setImgData((imgData) =>
           imgData ? [...imgData, ...imgDataFetch.hits] : imgDataFetch.hits
